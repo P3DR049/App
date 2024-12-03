@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolha o Perfil</title>
+    <style>
+        body {
+            background-color: #082567;
+            font-family: Arial, sans-serif;
+            color: white;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .logo-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .logo-container img {
+            width: 200px;
+            height: auto;
+        }
+        .grid {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .button {
+            background-color: rgba(230, 70, 70, 1);
+            color: white;
+            text-align: center;
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: rgba(255, 100, 100, 1);
+        }
+        .button-secondary {
+            background-color: rgba(70, 70, 230, 1);
+        }
+        .button-secondary:hover {
+            background-color: rgba(100, 100, 255, 1);
+        }
+        .btn-voltar {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 20px;
+            background-color: rgba(230, 70, 70, 1);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+        }
+        .btn-voltar:hover {
+            background-color: rgba(255, 100, 100, 1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Praia Selecionada: {{ praia_nome }}</h1>
+    <!-- Adicionando a imagem da logo -->
+    <div class="logo-container">
+        <img src="{{ url_for('static', filename='assets/logo.png') }}" alt="Logo">
+    </div>
+    <div class="grid">
+        <!-- Botão Pescador -->
+        <form action="/pescadores" method="GET">
+            <input type="hidden" name="praia_nome" value="{{ praia_nome }}">
+            <button class="button">Pescador</button>
+        </form>
+        <!-- Botão Banhista -->
+        <form action="/banhistas" method="GET">
+            <input type="hidden" name="praia_nome" value="{{ praia_nome }}">
+            <button class="button button-secondary">Banhista</button>
+        </form>
+    </div>
+    <a href="/" class="btn-voltar">Voltar</a>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informações para Pescadores</title>
+    <style>
+        body {
+            background-color: #082567;
+            font-family: Arial, sans-serif;
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 24px;
+        }
+        .bandeira {
+            width: 100px;
+            height: auto;
+        }
+        .info-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        .info-item {
+            text-align: center;
+            flex: 1;
+        }
+        .info-item img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+        .info-item span {
+            display: block;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .scrollable {
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .scrollable h2 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid white;
+        }
+        th, td {
+            text-align: center;
+            padding: 8px;
+        }
+        .btn-voltar {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 30px;
+            background-color: rgba(230, 70, 70, 1);
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 20px;
+        }
+        .btn-voltar:hover {
+            background-color: rgba(255, 100, 100, 1);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Praia Selecionada: {{ praia_nome }}</h1>
+        <img class="bandeira" src="{{ url_for('static', filename='assets/bandeira_verde.png') }}" alt="Bandeira">
+    </div>
+    <div class="info-container">
+        <div class="info-item">
+            <img src="{{ url_for('static', filename='assets/temperatura_icon.png') }}" alt="Temperatura do Ar">
+            <span>Ar: {{ dados_climaticos['temperatura'] }}°C</span>
+        </div>
+        <div class="info-item">
+            <img src="{{ url_for('static', filename='assets/agua_icon.png') }}" alt="Temperatura da Água">
+            <span>Água: {{ temperatura_agua }}°C</span>
+        </div>
+        <div class="info-item">
+            <img src="{{ url_for('static', filename='assets/mare_icon.png') }}" alt="Nível da Maré">
+            <span>Maré: {{ nivel_mare }}</span>
+        </div>
+        <div class="info-item">
+            <img src="{{ url_for('static', filename='assets/ressaca_icon.png') }}" alt="Ressaca">
+            <span>Ressaca: {{ nivel_ressaca }}</span>
+        </div>
+        <div class="info-item">
+            <img src="{{ url_for('static', filename='assets/correnteza_icon.png') }}" alt="Correnteza">
+            <span>Correnteza: {{ correnteza }}</span>
+        </div>
+    </div>
+    <div class="scrollable">
+        <h2>Espécies Disponíveis</h2>
+        <table>
+            <tr>
+                <th>Espécie</th>
+                <th>Período</th>
+                <th>Observação</th>
+            </tr>
+            {% for especie in especies %}
+            <tr>
+                <td>{{ especie['especie'] }}</td>
+                <td>{{ especie['periodo'] }}</td>
+                <td>{{ especie['observacao'] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <form action="/escolha" method="POST">
+        <input type="hidden" name="nome" value="{{ praia_nome }}">
+        <input type="hidden" name="localizacao" value="Localização Desconhecida">
+        <button class="btn-voltar">Voltar</button>
+    </form>
+</body>
+</html>

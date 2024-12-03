@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selecionar Praia</title>
+    <style>
+        body {
+            background-color: #082567;
+            font-family: Arial, sans-serif;
+            color: white;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px; /* Reduzi o espaço entre os cards */
+        }
+        .button {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            text-align: center;
+            width: 100%;
+            max-width: 250px; /* Limita o tamanho máximo dos cards */
+            height: 300px; /* Altura menor */
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            padding: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .button img {
+            max-width: 90%; /* Imagens ajustadas para caber nos cards */
+            max-height: 65%; /* Ajustei a altura máxima das imagens */
+            object-fit: cover; /* Garante que as imagens sejam cortadas proporcionalmente */
+        }
+        .button span {
+            display: block;
+            margin-top: 10px;
+            font-size: 16px; /* Texto menor para corresponder ao tamanho do card */
+            font-weight: bold;
+            color: black; /* Nome da praia em preto */
+        }
+    </style>
+</head>
+<body>
+    <h1>Selecione uma Praia</h1>
+    <div class="grid">
+        <!-- Praia de Itaúna -->
+        <form action="/escolha" method="POST" class="button">
+            <input type="hidden" name="nome" value="Praia de Itaúna">
+            <input type="hidden" name="localizacao" value="Saquarema">
+            <button>
+                <img src="{{ url_for('static', filename='assets/itauna.png') }}" alt="Praia de Itaúna">
+                <span>Praia de Itaúna</span>
+            </button>
+        </form>
+        <!-- Praia da Concha -->
+        <form action="/escolha" method="POST" class="button">
+            <input type="hidden" name="nome" value="Praia da Concha">
+            <input type="hidden" name="localizacao" value="Cabo Frio">
+            <button>
+                <img src="{{ url_for('static', filename='assets/concha.png') }}" alt="Praia da Concha">
+                <span>Praia da Concha</span>
+            </button>
+        </form>
+        <!-- Praia de Geribá -->
+        <form action="/escolha" method="POST" class="button">
+            <input type="hidden" name="nome" value="Praia de Geribá">
+            <input type="hidden" name="localizacao" value="Armação dos Búzios">
+            <button>
+                <img src="{{ url_for('static', filename='assets/geriba.png') }}" alt="Praia de Geribá">
+                <span>Praia de Geribá</span>
+            </button>
+        </form>
+        <!-- Praia de Copacabana -->
+        <form action="/escolha" method="POST" class="button">
+            <input type="hidden" name="nome" value="Praia de Copacabana">
+            <input type="hidden" name="localizacao" value="Copacabana">
+            <button>
+                <img src="{{ url_for('static', filename='assets/copacabana.png') }}" alt="Praia de Copacabana">
+                <span>Praia de Copacabana</span>
+            </button>
+        </form>
+    </div>
+</body>
+</html>
